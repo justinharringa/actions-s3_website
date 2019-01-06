@@ -13,7 +13,7 @@ COPY LICENSE README.md /
 
 # Install JRE 8 (required for Scala jar)
 RUN apt-get update -qq && \
-    apt-get install --assume-yes -y \
+    apt-get install --assume-yes -y --no-install-recommends \
        openjdk-8-jre \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
