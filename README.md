@@ -1,11 +1,14 @@
 # GitHub Action / Docker container for s3_website
-GitHub Action to run [s3_website](https://github.com/laurilehmijoki/s3_website/)
+GitHub Action and [Docker container](https://hub.docker.com/r/justinharringa/s3_website/) 
+to run [s3_website](https://github.com/laurilehmijoki/s3_website/)
 
 ## Docker Usage
 This container has been published to Docker Hub and can be used as a container. To run it,
 simply run `docker run --rm justinharringa/s3_website ...` where `...` is the normal arguments
 you'd pass to s3_website. If you don't pass any arguments you'll see the equivalent of 
 `s3_website help`.
+
+[Docker Hub - justinharringa/s3_website](https://hub.docker.com/r/justinharringa/s3_website/)
 
 ## GitHub Actions Usage
 The following example uses this GitHub Action to push the contents of the `build` folder to an 
