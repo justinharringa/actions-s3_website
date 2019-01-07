@@ -1,0 +1,26 @@
+s3_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+s3_secret: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+s3_bucket: <%= ENV['S3_BUCKET'] %>
+s3_endpoint: us-west-2
+
+max_age:
+  "img/*": <%= 24 * 60 * 60 %>
+  "css/*": <%= 24 * 60 * 60 %>
+  "js/*": <%= 24 * 60 * 60 %>
+  "favicon.ico": <%= 365 * 24 * 60 * 60 %>
+  "error.html": <%= 365 * 24 * 60 * 60 %>
+  "robots.txt": <%= 365 * 24 * 60 * 60 %>
+  "*": <%= 60 * 60 %>
+
+gzip:
+  - .html
+  - .css
+  - .js
+
+exclude_from_upload:
+  - .md
+  - .gitignore
+  - .git
+  - .env
+
+cloudfront_distribution_id: <%= ENV['AWS_CLOUDFRONT_DISTRIBUTION'] %>

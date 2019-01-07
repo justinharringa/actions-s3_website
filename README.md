@@ -8,16 +8,20 @@ you'd pass to s3_website. If you don't pass any arguments you'll see the equival
 `s3_website help`.
 
 ## GitHub Actions Usage
-Example GitHub Action:
+The following example uses this GitHub Action to push the contents of the `build` folder to an 
+S3 bucket and update a CloudFront distribution. It still requires that you provide an `s3_website.yml`
+such as [s3_website.yml](/example/s3_website.yml).
 
 ```
 workflow "Main" {
   on = "push"
-  resolves = ["s3_website"]
+  resolves = ["s3_website push"]
 }
 
-action "s3_website" {
-  uses = "docker://justinharringa/actions-s3_website:master"
-  args = ["push", "and", "your", "args"]
+action "s3_website push" {
+  uses = "justinharringa/actions-s3_website@master"
+  needs = ["Build"]
+  secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "S3_BUCKET", "AWS_CLOUDFRONT_DISTRIBUTION"]
+  args = "push --site build"
 }
 ```
