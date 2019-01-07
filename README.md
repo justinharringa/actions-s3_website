@@ -4,9 +4,17 @@ to run [s3_website](https://github.com/laurilehmijoki/s3_website/)
 
 ## Docker Usage
 This container has been published to Docker Hub and can be used as a container. To run it,
-simply run `docker run --rm justinharringa/s3_website ...` where `...` is the normal arguments
-you'd pass to s3_website. If you don't pass any arguments you'll see the equivalent of 
-`s3_website help`.
+you'd run something like: 
+
+```
+docker run --rm -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY 
+-e S3_BUCKET -e AWS_CLOUDFRONT_DISTRIBUTION --mount type=bind,source="$(pwd)",target=/site,readonly 
+justinharringa/s3_website push --site _site
+```
+
+If you don't pass any arguments you'll see the equivalent of `s3_website help`. Note that you'll mount
+your host location into `/site` and will also need to pass in any environment variables that your
+`s3_website.yml` or `s3_website` itself requires.
 
 [Docker Hub - justinharringa/s3_website](https://hub.docker.com/r/justinharringa/s3_website/)
 
