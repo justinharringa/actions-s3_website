@@ -20,7 +20,6 @@ workflow "Main" {
 
 action "s3_website push" {
   uses = "justinharringa/actions-s3_website@master"
-  needs = ["Build"]
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "S3_BUCKET", "AWS_CLOUDFRONT_DISTRIBUTION"]
   args = "push --site build"
 }
