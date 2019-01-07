@@ -21,6 +21,10 @@ RUN apt-get update -qq && \
 ENV LC_CTYPE en_US.UTF-8
 ENV LANG en_US.UTF-8
 
+# Place site files in /site and set the workdir there for s3_website
+RUN mkdir /site
+WORKDIR /site
+
 # Install s3_website
 RUN gem install s3_website && s3_website install
 
