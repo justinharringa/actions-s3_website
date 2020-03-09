@@ -24,16 +24,15 @@ S3 bucket and update a CloudFront distribution. It still requires that you provi
 such as [s3_website.yml](/example/s3_website.yml).
 
 ```
-workflow "Main" {
-  on = "push"
-  resolves = ["s3_website push"]
-}
-
-action "s3_website push" {
-  uses = "justinharringa/actions-s3_website@master"
-  secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "S3_BUCKET", "AWS_CLOUDFRONT_DISTRIBUTION"]
-  args = "push --site build"
-}
+      - name: Deploy
+        uses: docker://justinharringa/s3_website:master
+        with:
+          args: 'push --site build'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_CLOUDFRONT_DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION }}
 ```
 
 ## Why?
