@@ -36,11 +36,13 @@ jobs:
         with:
           args: 'Dockerfile'
       - name: docker build
-        run: docker build -t justinharringa/s3_website:master .
+        run: docker build -t justinharringa/s3_website:master . && docker tag justinharringa/s3_website:master justinharringa/s3_website:latest
       - name: docker login
         run: docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - name: docker push
+      - name: docker push master
         run: docker push justinharringa/s3_website:master
+      - name: docker push latest
+        run: docker push justinharringa/s3_website:latest
