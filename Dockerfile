@@ -1,12 +1,12 @@
 FROM ruby:2.6.0
 
-LABEL version="1.0.0"
+LABEL version="3.4.0"
 LABEL repository="http://github.com/justinharringa/actions-s3_website"
 LABEL homepage="http://github.com/justinharringa/actions-s3_website"
 LABEL maintainer="Justin Harringa <justin@harringa.com>"
 
 LABEL com.github.actions.name="GitHub Action for s3_website"
-LABEL com.github.actions.description="Provides s3_website to push static sites to AWS (aka JAMstack)."
+LABEL com.github.actions.description="Provides s3_website to push static sites to AWS (aka JAMstack). Docker wrapper around laurilehmijoki/s3_website"
 LABEL com.github.actions.icon="upload-cloud"
 LABEL com.github.actions.color="yellow"
 COPY LICENSE README.md /
