@@ -1,0 +1,46 @@
+name: 'cd'
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+env:
+  CI: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+      - name: docker lint
+        uses: docker://replicated/dockerfilelint
+        with:
+          args: 'Dockerfile'
+      - name: docker build
+        run: docker build -t justinharringa/s3_website .
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+      - name: docker lint
+        uses: docker://replicated/dockerfilelint
+        with:
+          args: 'Dockerfile'
+      - name: docker build
+        run: docker build -t justinharringa/s3_website:master .
+      - name: docker login
+        run: docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: docker push
+        run: docker push justinharringa/s3_website:master
