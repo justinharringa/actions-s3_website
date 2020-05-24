@@ -1,4 +1,4 @@
-FROM ruby:2.6.0
+FROM ruby:2.7.1
 
 LABEL version="3.4.0"
 LABEL repository="http://github.com/justinharringa/actions-s3_website"
