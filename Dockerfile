@@ -1,4 +1,4 @@
-FROM ruby:2.6.0
+FROM ruby:2.7
 
 LABEL version="3.4.0"
 LABEL repository="http://github.com/justinharringa/actions-s3_website"
@@ -14,7 +14,7 @@ COPY LICENSE README.md /
 # Install JRE 8 (required for Scala jar)
 RUN apt-get update -qq && \
     apt-get install --assume-yes -y --no-install-recommends \
-       openjdk-8-jre \
+       default-jre-headless \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
