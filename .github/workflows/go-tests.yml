@@ -1,0 +1,26 @@
+name: 'go-tests'
+
+on:
+  push:
+  pull_request:
+
+env:
+  CI: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: set up go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: go test
+        run: go test -v -timeout 30m ./...

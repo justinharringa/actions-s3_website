@@ -35,6 +35,22 @@ such as [s3_website.yml](/example/s3_website.yml).
           AWS_CLOUDFRONT_DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION }}
 ```
 
+## Running the Tests
+
+The test suite uses [testcontainers-go](https://golang.testcontainers.org/) to build the
+Dockerfile and run the container locally, verifying its behaviour without requiring AWS
+credentials.
+
+**Prerequisites:** Docker and [Go](https://go.dev/dl/) must be installed.
+
+```bash
+go test -v -timeout 30m ./...
+```
+
+The first run will build the Docker image (which can take several minutes as it installs
+the JRE and `s3_website` gem). Subsequent runs reuse the cached image layer and are
+significantly faster.
+
 ## Why?
 I have been using s3_website for quite some time and it works great 
 (huge thanks to [Lauri Lehmijoki](https://github.com/laurilehmijoki) / 
